@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Сообщения</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        form {
+            margin-bottom: 30px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+        input, button {
+            padding: 8px;
+            margin: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .message-list {
+            margin-top: 20px;
+        }
+        .message-item {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            padding: 10px;
+            margin: 10px 0;
+            border-left: 4px solid #4CAF50;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+        }
+        .message-id { font-weight: bold; color: #333; }
+        .message-text { color: #000; }
+        .message-tag { color: #666; font-style: italic; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Система сообщений</h1>
+
+    <!-- Добавление нового сообщения -->
+    <form method="post" th:action="@{/main}">
+        <input type="text" name="text" placeholder="Введите сообщение" />
+        <input type="text" name="tag" placeholder="Тэг" />
+        <button type="submit">Добавить</button>
+    </form>
+
+    <!-- Фильтрация по тегу -->
+    <form method="post" th:action="@{/filter}">
+        <input type="text" name="filter" placeholder="Сортировка"/>
+        <button type="submit">Найти</button>
+    </form>
+
+    <!-- Логаут -->
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out"/>
+    </form>
+
+    <!-- Вывод списка сообщений -->
+    <div class="message-list">
+        <h2>Список сообщений</h2>
+        <div th:each="message : ${messages}" class="message-item">
+            <span class="message-id" th:text="${message.id}">ID</span>
+            <span class="message-text" th:text="${message.text}">Текст сообщения</span>
+            <span class="message-tag" th:text="${message.tag}">Тэг</span>
+        </div>
+    </div>
+</div>
+</body>
+</html>
