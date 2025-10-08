@@ -24,8 +24,15 @@ public class SecurityConfig {
     //Настроим метод позволяющий настроить Spring security, а так же авторизацию
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        /**
+         * Ниже код для отключения CSRF, при его удалении - защита автоматически будет включена.
+         * Но для корректной работы, нужно добавить этот токен в форму аутентификации
+         * CSFR токен нужно добавить в 1 форму, остальные ее автоматически подтянут
+         *
+         * При включении CSRF, нельзя просто так разлогиниться!
+         */
 //  Отключаем CSRF
-        http.csrf(AbstractHttpConfigurer::disable);
+      //  http.csrf(AbstractHttpConfigurer::disable);
 //  Настраиваем авторизацию
         http.authorizeHttpRequests((requests) ->
                 requests

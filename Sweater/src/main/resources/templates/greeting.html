@@ -43,7 +43,10 @@
 <div class="container">
     <h1 th:text="|Привет, Дорогой друг!|">Привет, пользователь!</h1>
     <a href="/main">Главная страница</a>
-    <a href="/logout">Выход</a>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out"/>
+    </form>
+
 </div>
 </body>
 </html>

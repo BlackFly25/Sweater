@@ -114,6 +114,11 @@
     </div>
 
     <form th:action="@{/process_login}" method="post">
+
+        <!-- CSFR токен добавляем -->
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+        <!-- CSFR токен добавляем -->
+
         <div>
             <label for="username">Введите имя пользователя:</label>
             <input type="text" name="username" id="username" placeholder="Введите имя" required/>
