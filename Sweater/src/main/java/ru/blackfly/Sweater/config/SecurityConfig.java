@@ -28,7 +28,7 @@ public class SecurityConfig {
 //  Настраиваем авторизацию
         http.authorizeHttpRequests((requests) ->
                 requests
-                        .requestMatchers("/auth/login", "/process_login", "/error").permitAll()
+                        .requestMatchers("/auth/login", "/process_login", "/error", "/auth/registration").permitAll()
                         .anyRequest().authenticated()
         );
 // Настраиваем страницу логина

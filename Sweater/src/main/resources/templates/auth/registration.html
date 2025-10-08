@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Вход в систему</title>
+    <title>Регистрация пользователя</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -81,16 +81,14 @@
             color: #4CAF50;
         }
 
-        .register-link {
-            display: inline-block;
-            margin-top: 15px;
+        a {
             color: #4CAF50;
             text-decoration: none;
             font-weight: bold;
             transition: color 0.3s ease;
         }
 
-        .register-link:hover {
+        a:hover {
             color: #45a049;
         }
 
@@ -107,30 +105,45 @@
 </head>
 <body>
 <div class="container">
-    <h1>Вход в систему</h1>
+    <h1>Регистрация пользователя</h1>
 
-    <div th:if="${param.error}" class="message error">
-        Неверное имя пользователя или пароль!
+    <div th:if="${message}" class="message error">
+        <p th:text="${message}"></p>
     </div>
 
-    <form th:action="@{/process_login}" method="post">
+    <div th:if="${param.error}" class="message error">
+        Неверное имя пользователя или пароль.
+    </div>
+
+    <div th:if="${param.logout}" class="message success">
+        Вы успешно вышли из системы.
+    </div>
+
+    <form th:action="@{/auth/registration}" th:method="post" th:object="${user}">
         <div>
-            <label for="username">Введите имя пользователя:</label>
-            <input type="text" name="username" id="username" placeholder="Введите имя" required/>
+            <label for="username">Имя пользователя:</label>
+            <input type="text" th:field="*{username}" id="username" placeholder="Введите имя" required>
+            <div style="color:red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
         </div>
+
         <div>
-            <label for="password">Введите пароль:</label>
-            <input type="password" name="password" id="password" placeholder="Введите пароль" required/>
+            <label for="password">Пароль:</label>
+            <input type="password" th:field="*{password}" id="password" placeholder="Введите пароль" required>
+            <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
         </div>
+
         <div>
-            <input type="submit" value="Login"/>
+            <label for="yearOfBirth">Год рождения:</label>
+            <input type="text" th:field="*{yearOfBirth}" id="yearOfBirth" placeholder="Введите год рождения" required>
+            <div style="color:red" th:if="${#fields.hasErrors('yearOfBirth')}" th:errors="*{yearOfBirth}"></div>
         </div>
-    </form>
-    <form th:action="@{/auth/registration}" method="get" style="margin-top: 15px; text-align: center;">
-        <input type="submit" value="Create new User"/>
+
+        <input type="submit" value="Создать аккаунт">
     </form>
 
-
+    <form th:action="@{/auth/login}" method="get" style="margin-top: 15px; text-align: center;">
+        <input type="submit" value="Return to LoginPage"/>
+    </form>
 </div>
 </body>
 </html>
