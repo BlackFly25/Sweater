@@ -1,9 +1,9 @@
-package ru.blackfly.Sweater.security;
+package ru.blackfly.security;
 
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import ru.blackfly.Sweater.models.User;
+import ru.blackfly.models.User;
 
 import java.util.Collection;
 import java.util.List;

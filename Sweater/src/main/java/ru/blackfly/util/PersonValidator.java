@@ -1,13 +1,12 @@
-package ru.blackfly.Sweater.util;
+package ru.blackfly.util;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-import ru.blackfly.Sweater.models.User;
-
-import ru.blackfly.Sweater.services.PersonDetailsService;
+import ru.blackfly.services.PersonDetailsService;
+import ru.blackfly.models.User;
 
 @Component
 public class PersonValidator implements Validator {

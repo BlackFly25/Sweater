@@ -1,4 +1,4 @@
-package ru.blackfly.Sweater;
+package ru.blackfly;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

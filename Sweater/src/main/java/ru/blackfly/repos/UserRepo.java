@@ -1,9 +1,9 @@
-package ru.blackfly.Sweater.repos;
+package ru.blackfly.repos;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import ru.blackfly.Sweater.models.User;
+import ru.blackfly.models.User;
 
 import java.util.Optional;
 

@@ -1,13 +1,13 @@
-package ru.blackfly.Sweater.services;
+package ru.blackfly.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import ru.blackfly.Sweater.models.User;
-import ru.blackfly.Sweater.repos.UserRepo;
-import ru.blackfly.Sweater.security.PersonDetails;
+import ru.blackfly.models.User;
+import ru.blackfly.repos.UserRepo;
+import ru.blackfly.security.PersonDetails;
 
 import java.util.Optional;
 

@@ -1,11 +1,11 @@
-package ru.blackfly.Sweater.services;
+package ru.blackfly.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.blackfly.Sweater.models.User;
-import ru.blackfly.Sweater.repos.UserRepo;
+import ru.blackfly.repos.UserRepo;
+import ru.blackfly.models.User;
 
 @Service
 public class RegistrationService {

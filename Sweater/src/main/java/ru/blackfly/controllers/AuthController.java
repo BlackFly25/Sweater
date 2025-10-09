@@ -1,16 +1,15 @@
-package ru.blackfly.Sweater.controllers;
+package ru.blackfly.controllers;
 
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.blackfly.Sweater.models.User;
-import ru.blackfly.Sweater.services.RegistrationService;
-import ru.blackfly.Sweater.util.PersonValidator;
+import ru.blackfly.services.RegistrationService;
+import ru.blackfly.models.User;
+import ru.blackfly.util.PersonValidator;
 
 @Controller
 @RequestMapping("/auth")

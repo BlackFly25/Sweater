@@ -1,9 +1,9 @@
-package ru.blackfly.Sweater.repos;
+package ru.blackfly.repos;
 
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-import ru.blackfly.Sweater.models.Message;
+import ru.blackfly.models.Message;
 
 import java.util.List;
 

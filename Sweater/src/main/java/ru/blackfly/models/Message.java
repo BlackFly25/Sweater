@@ -1,4 +1,4 @@
-package ru.blackfly.Sweater.models;
+package ru.blackfly.models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
