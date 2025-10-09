@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name="users")
@@ -28,6 +29,12 @@ public class User {
     @Min(value = 1900,message = "Год рождения не должен быть больше, 1900")
     private Integer yearOfBirth;
 
+    private boolean active;
+
+    @ElementCollection(targetClass=Role.class, fetch=FetchType.EAGER)
+    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
+    @Enumerated(EnumType.STRING)
+    private Set<Role> roles;
     public User() {
     }
 
@@ -40,6 +47,22 @@ public class User {
     public User(String username, String password) {
         this.username = username;
         this.password = password;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
     public int getId() {
@@ -81,6 +104,8 @@ public class User {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", yearOfBirth=" + yearOfBirth +
+                ", active=" + active +
+                ", roles=" + roles +
                 '}';
     }
 

@@ -7,9 +7,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import ru.blackfly.models.Role;
 import ru.blackfly.services.RegistrationService;
 import ru.blackfly.models.User;
 import ru.blackfly.util.PersonValidator;
+
+import java.util.Collections;
 
 @Controller
 @RequestMapping("/auth")
@@ -39,6 +42,8 @@ public class AuthController {
         if (bindingResult.hasErrors()) {
             return "/auth/registration";
         }
+        user.setActive(true);
+        user.setRoles(Collections.singleton(Role.USER));
         registrationService.registerUser(user);
         return "redirect:/auth/login";
     }
