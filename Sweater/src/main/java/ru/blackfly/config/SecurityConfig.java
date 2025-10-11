@@ -34,7 +34,9 @@ public class SecurityConfig {
 //  Настраиваем авторизацию
         http.authorizeHttpRequests((requests) ->
                 requests
+                        .requestMatchers("/admin").hasRole("ADMIN") // это для доступа к админской страничке.
                         .requestMatchers("/auth/login", "/process_login", "/error", "/auth/registration").permitAll()
+                        //.anyRequest().hasAnyRole("USER", "ADMIN") это если мы прям по ролям хотим закрыть доступ!
                         .anyRequest().authenticated()
         );
 // Настраиваем страницу логина

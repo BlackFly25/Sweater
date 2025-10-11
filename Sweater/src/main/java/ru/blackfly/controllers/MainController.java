@@ -67,5 +67,13 @@ public class MainController {
         return "main";
     }
 
+    /**
+     * Ниже админская страничка, с ограниченным доступом
+     */
+    @GetMapping("/admin")
+    public String admin() {
+        return "admin";
+    }
+
 
 }

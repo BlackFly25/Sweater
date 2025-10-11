@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Админская панель</title>
+    <style>
+        :root {
+            --box-bg: #f9f9f9;
+            --box-padding: 15px;
+            --box-radius: 5px;
+            --control-height: 40px;
+            --accent: #4CAF50;
+        }
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 { margin-top: 0; }
+
+        .compact-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: var(--box-padding);
+            background: var(--box-bg);
+            border-radius: var(--box-radius);
+            margin-bottom: 25px;
+            width: 100%;
+        }
+
+        .filter-logout-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .compact-row > form {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        input[type="text"], select, button {
+            height: var(--control-height);
+            padding: 0 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        input[type="text"], select {
+            flex: 1;
+        }
+
+        button, .logout-btn {
+            background-color: var(--accent);
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.15s ease;
+        }
+        button:hover, .logout-btn:hover {
+            background-color: #45a049;
+        }
+
+        .user-list {
+            margin-top: 20px;
+        }
+        .user-item {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            padding: 10px;
+            margin: 10px 0;
+            border-left: 4px solid var(--accent);
+            background-color: var(--box-bg);
+            border-radius: 4px;
+        }
+        .user-id { font-weight: bold; color: #333; width: 40px; }
+        .user-name { color: #000; flex: 1; }
+        .user-role select { width: 120px; }
+        .user-actions button { margin-left: 5px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Админская панель</h1>
+
+    <!-- Фильтрация пользователей и логаут -->
+    <div class="compact-row filter-logout-row">
+        <form method="post" th:action="@{/admin/filter}" class="filter-form">
+            <input type="text" name="filter" placeholder="Поиск пользователей" />
+            <button type="submit">Найти</button>
+        </form>
+        <form th:action="@{/main}" method="get" class="logout-form">
+            <button type="submit" class="logout-btn">Назад</button>
+        </form>
+
+        <form th:action="@{/logout}" method="post" class="logout-form">
+            <button type="submit" class="logout-btn">Выйти</button>
+        </form>
+
+    </div>
+
+    <!-- Список пользователей -->
+    <div class="user-list">
+        <h2>Пользователи</h2>
+        <div th:each="user : ${users}" class="user-item">
+            <span class="user-id" th:text="${user.id}">ID</span>
+            <span class="user-name" th:text="${user.username}">Имя пользователя</span>
+
+            <form method="post" th:action="@{/admin/changeRole}" class="user-role">
+                <input type="hidden" th:name="userId" th:value="${user.id}" />
+                <select name="role" th:value="${user.role}">
+                    <option th:selected="${user.role=='USER'}" value="USER">USER</option>
+                    <option th:selected="${user.role=='ADMIN'}" value="ADMIN">ADMIN</option>
+                </select>
+                <button type="submit">Сохранить</button>
+            </form>
+
+            <form method="post" th:action="@{/admin/deleteUser}" class="user-actions">
+                <input type="hidden" th:name="userId" th:value="${user.id}" />
+                <button type="submit">Удалить</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
