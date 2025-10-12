@@ -132,8 +132,8 @@
 
     <!-- Фильтрация и логаут  -->
     <div class="compact-row filter-logout-row">
-        <form method="post" th:action="@{/filter}" class="filter-form">
-            <input type="text" name="filter" placeholder="Сортировка" />
+        <form method="get" th:action="@{/main}" class="filter-form">
+            <input type="text" name="filter" placeholder="Сортировка"  th:value="${filter}" />
             <button type="submit">Найти</button>
         </form>
 

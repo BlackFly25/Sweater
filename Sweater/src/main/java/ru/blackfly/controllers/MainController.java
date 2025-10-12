@@ -14,8 +14,6 @@ import ru.blackfly.models.User;
 import ru.blackfly.repos.MessageRepos;
 import ru.blackfly.security.PersonDetails;
 
-import java.util.List;
-
 @Controller
 public class MainController {
 
@@ -42,9 +40,15 @@ public class MainController {
     }
 
     @GetMapping("/main")
-    public String main(Model model) {
+    public String main(@RequestParam(required = false) String filter, Model model) {
         Iterable<Message> messages = messageRepos.findAll();
+        if(filter != null && !filter.isEmpty()){
+            messages= messageRepos.findByTag(filter);}
+        else {
+            messages= messageRepos.findAll();
+        }
         model.addAttribute("messages", messages);
+        model.addAttribute("filter", filter);
         return "main";
     }
 
@@ -57,18 +61,6 @@ public class MainController {
         Iterable<Message> messages = messageRepos.findAll();
         model.addAttribute("messages", messages);
 
-        return "main";
-    }
-
-    @PostMapping("/filter")
-    public String filter(@RequestParam String filter, Model model) {
-        Iterable<Message> messages;
-        if(filter != null && !filter.isEmpty()){
-            messages= messageRepos.findByTag(filter);}
-        else {
-            messages= messageRepos.findAll();
-        }
-       model.addAttribute("messages", messages);
         return "main";
     }
 
