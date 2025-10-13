@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.filter.HiddenHttpMethodFilter;
 import ru.blackfly.services.PersonDetailsService;
 
 @EnableWebSecurity
@@ -19,6 +20,7 @@ public class SecurityConfig {
     public SecurityConfig(PersonDetailsService personDetailsService) {
         this.personDetailsService = personDetailsService;
     }
+
     //Настроим метод позволяющий настроить Spring security, а так же авторизацию
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -30,7 +32,7 @@ public class SecurityConfig {
          * При включении CSRF, нельзя просто так разлогиниться!
          */
 //  Отключаем CSRF
-      //  http.csrf(AbstractHttpConfigurer::disable);
+        //  http.csrf(AbstractHttpConfigurer::disable);
 //  Настраиваем авторизацию
         http.authorizeHttpRequests((requests) ->
                 requests
@@ -72,5 +74,10 @@ public class SecurityConfig {
     @Bean
     public PasswordEncoder getPasswordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public HiddenHttpMethodFilter hiddenHttpMethodFilter() {
+        return new HiddenHttpMethodFilter();
     }
 }

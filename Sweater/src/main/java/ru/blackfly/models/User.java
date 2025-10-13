@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -35,6 +36,9 @@ public class User {
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
+
+    @OneToMany(mappedBy = "author", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Message> messages;
     public User() {
     }
 
@@ -95,6 +99,14 @@ public class User {
 
     public void setYearOfBirth(Integer yearOfBirth) {
         this.yearOfBirth = yearOfBirth;
+    }
+
+    public List<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
     }
 
     @Override

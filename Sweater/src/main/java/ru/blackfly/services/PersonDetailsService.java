@@ -5,6 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.blackfly.models.User;
 import ru.blackfly.repos.UserRepo;
 import ru.blackfly.security.PersonDetails;
@@ -29,5 +30,14 @@ public class PersonDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("User not found");
         }
         return new PersonDetails(user.get());
+    }
+    @Transactional
+    public void update(int id,User userUp) {
+        userUp.setId(id);
+        userRepository.save(userUp);
+    }
+    @Transactional
+    public void delete(Long id) {
+        userRepository.deleteById(id);
     }
 }
